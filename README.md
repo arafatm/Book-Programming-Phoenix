@@ -24,6 +24,23 @@ reliable, and easier to understand.
 `$ mix archive.install https://github.com/phoenixframework/archives/raw/`
 
 ### Creating a Throwaway Project
+
+```
+cd hello
+
+sudo apt-get install erlang-dev erlang-parsetools
+
+sudo -u postgres psql postgres  $ -> \password postgres
+
+apt-get mix phoenix.new hello
+
+mix ecto.create
+
+mix phoenix.server
+```
+
+[http://localhost:4000](http://localhost:4000)
+
 ### Building a Feature
 ### Going Deeper: The Request Pipeline
 ### Wrapping Up
