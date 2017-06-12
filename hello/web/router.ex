@@ -13,8 +13,10 @@ defmodule Hello.Router do
     plug :accepts, ["json"]
   end
 
-  get '/hello',  HelloController :world
-  get '/',      PageController, :index
+
+  get "/hello", HelloController, :world
+  get "/", PageController, :index
+
 
   scope "/", Hello do
     pipe_through :browser # Use the default browser stack
