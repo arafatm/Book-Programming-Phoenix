@@ -104,7 +104,14 @@ connection
 ```
 
 ## Chapter 3: Controllers, Views, and Templates
+
 ### The Controller
+
+Create new Rumbl app
+[$ mix phoenix.new rumbl && cd rumbl && mix ecto.create](https://github.com/arafatm/Book-Programming-Phoenix/commit/5e0951e)
+
+[Set "Rumbl.io" on home page](https://github.com/arafatm/Book-Programming-Phoenix/commit/072fde3)
+
 ### Creating Some Users
 ### Building a Controller
 ### Coding Views
