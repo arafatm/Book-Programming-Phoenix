@@ -149,8 +149,26 @@ Standard actions: `:show`, `:index`, `:new`, `:create`, `:edit`, `:update`, `:de
 ### Coding Views
 
 [get /users display all users and link to user/:id](https://github.com/arafatm/Book-Programming-Phoenix/commit/6969425)
+- Fix: [display User.name, not User.username](https://github.com/arafatm/Book-Programming-Phoenix/commit/ae74a65)
 
 ### Using Helpers
+
+We can test helpers in `iex`
+```elixir
+iex> Phoenix.HTML.Link.link('Home', to: '/')
+    {:safe, ['<a href=\'/\'>', 'Home', '</a>']}
+
+iex> Phoenix.HTML.Link.link('Delete', to: '/', method: 'delete')
+    {:safe,
+    [['<form action=\'/\' class=\'link\' method=\'post\'>',
+      '<input name=\'_method\' type=\'hidden\' value=\'delete\'>
+      <input name=\'_csrf_token\' type=\'hidden\' value=\'UhdjBFUcOh...\'>'],
+     ['<a data-submit=\'parent\' href=\'#\'>', '[x]', '</a>'], '</form>']}
+```
+
+In views e.g. `web/views/user_view.ex` we see at the top `user Rumbl.Web, 
+:view`
+
 ### Showing a User
 ### Wrapping Up
 
