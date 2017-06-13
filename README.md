@@ -166,10 +166,17 @@ iex> Phoenix.HTML.Link.link('Delete', to: '/', method: 'delete')
      ['<a data-submit=\'parent\' href=\'#\'>', '[x]', '</a>'], '</form>']}
 ```
 
-In views e.g. `web/views/user_view.ex` we see at the top `user Rumbl.Web, 
-:view`
+In views e.g. `web/views/user_view.ex` we see at the top `use Rumbl.Web, :view`
+
+This refers to `def view` in `web/web.ex`
 
 ### Showing a User
+
+[get /user/:id](https://github.com/arafatm/Book-Programming-Phoenix/commit/b113020)
+
+Refactor duplication by [render a nested 
+template](https://github.com/arafatm/Book-Programming-Phoenix/commit/ce7c5ee)
+
 ### Wrapping Up
 
 ## Chapter 4: Ecto and Changesets
