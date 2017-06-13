@@ -42,6 +42,17 @@ mix phoenix.server
 [http://localhost:4000](http://localhost:4000)
 
 ### Building a Feature
+
+[get /hello](https://github.com/arafatm/Book-Programming-Phoenix/commit/dd46353)
+- Add a route `/hello`
+- Add a `controllers/hello_controller.ex`
+- Add a `views/hello_view.ex`
+- Add a `templates/hello/world.html.eex`
+
+:boom: when you update the template the browser autoreloads
+
+[get /hello/:name - pass a parameter to the controller](https://github.com/arafatm/Book-Programming-Phoenix/commit/9499673)
+
 ### Going Deeper: The Request Pipeline
 ### Wrapping Up
 
