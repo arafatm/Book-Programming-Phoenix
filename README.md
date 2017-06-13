@@ -141,7 +141,15 @@ iex> Repo.get_by User, name: 'Bruce'
 ```
 
 ### Building a Controller
+
+Standard actions: `:show`, `:index`, `:new`, `:create`, `:edit`, `:update`, `:delete`
+
+[UserController get /users](https://github.com/arafatm/Book-Programming-Phoenix/commit/42fc696)
+
 ### Coding Views
+
+[get /users display all users and link to user/:id](https://github.com/arafatm/Book-Programming-Phoenix/commit/6969425)
+
 ### Using Helpers
 ### Showing a User
 ### Wrapping Up
