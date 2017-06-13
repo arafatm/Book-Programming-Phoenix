@@ -10,4 +10,9 @@ defmodule Rumbl.UserController do
     user = Repo.get(Rumbl.User, id)
     render conn, "show.html", user: user
   end
+
+  def new(conn, _params) do
+    changeset = Rumbl.User.changeset(%Rumbl.User{})
+    render conn, "new.html", changeset: changeset
+  end
 end
