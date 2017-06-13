@@ -113,6 +113,33 @@ Create new Rumbl app
 [Set "Rumbl.io" on home page](https://github.com/arafatm/Book-Programming-Phoenix/commit/072fde3)
 
 ### Creating Some Users
+
+[Model User: id, name, username, password](https://github.com/arafatm/Book-Programming-Phoenix/commit/ab19713)
+
+[Model User access functions](https://github.com/arafatm/Book-Programming-Phoenix/commit/0ab380d)
+
+[Disable Ecto for now](https://github.com/arafatm/Book-Programming-Phoenix/commit/571e9d7)
+
+To Test out
+```elixir
+iex> alias Rumbl.User
+iex> alias Rumbl.Repo
+
+iex> Repo.all User
+    [%Rumbl.User{id: '1', name: 'José', password: 'elixir', username: 'josevalim'},
+     %Rumbl.User{id: '3', name: 'Chris', password: 'phoenix', username: 'cmccord'},
+     %Rumbl.User{id: '2', name: 'Bruce', password: '7langs', username: 'redrapids'}]
+
+iex> Repo.all Rumbl.Other
+    []
+
+iex> Repo.get User, '1'
+    %Rumbl.User{id: '1', name: 'José', password: 'elixir', username: 'josevalim'}
+
+iex> Repo.get_by User, name: 'Bruce'
+    %Rumbl.User{id: '2', name: 'Bruce', password: '7langs', username: 'redrapids'}
+```
+
 ### Building a Controller
 ### Coding Views
 ### Using Helpers
