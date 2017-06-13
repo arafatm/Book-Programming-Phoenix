@@ -51,10 +51,57 @@ mix phoenix.server
 
 :boom: when you update the template the browser autoreloads
 
-[get /hello/:name - pass a parameter to the controller](https://github.com/arafatm/Book-Programming-Phoenix/commit/9499673)
+[get /hello/:name - add a parameter to the request](https://github.com/arafatm/Book-Programming-Phoenix/commit/9824626)
 
 ### Going Deeper: The Request Pipeline
-### Wrapping Up
+
+`Plug` is a function that acts on `conn`. The app is a **pipeline of plugs**
+
+Sample of project dir structure:
+- `config/` Phoenix configuration
+- `lib/` supervisision trees and long running processes
+- `test/`
+- `web` code incl. model, view, template, controller
+
+`web` vs `lib`
+- web is **live reloaded**
+- lib is for services, PubSub, DB conn pool, supervised procs
+
+Elixir Configuration: sample files
+- ├── lib
+- │   ├── hello
+- │   │   ├── endpoint.ex
+- │   │   └── ...
+- │   └── hello.ex        # start/stop/supervise app
+- ├── mix.exs             # main configuration file. Include deps
+- ├── mix.lock            # after compilation includes dep versions
+- ├── test
+
+`.ex` files are compiled into `.beam`. `.exs` are not
+
+Environment & endpoints
+- ├── config
+- │   ├── config.exs    # app config
+- │   ├── dev.exs
+- │   ├── prod.exs
+- │   ├── prod.secret.exs # secrets e.g. passwords
+- │   └── test.exs
+
+`config/config.exs` defines endpoints, logging, etc.
+
+e.g. [line 13 defines the 
+Endpoint](https://github.com/arafatm/Book-Programming-Phoenix/blob/090ae4ee0fc1dd40aed91a66d95ac627c47fd8af/hello/config/config.exs)
+which points to 
+[lib/hello.endpoints.ex](https://github.com/arafatm/Book-Programming-Phoenix/blob/090ae4ee0fc1dd40aed91a66d95ac627c47fd8af/hello/lib/hello/endpoint.ex)
+
+Typical Phoenix app looks like
+```
+connection
+|> endpoint     # includes functions for every request
+|> router
+|> pipeline     # common functions for each major type of request
+|> controller   # invokes model and render template
+```
 
 ## Chapter 3: Controllers, Views, and Templates
 ### The Controller
