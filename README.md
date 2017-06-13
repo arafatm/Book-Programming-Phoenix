@@ -178,8 +178,34 @@ Refactor duplication by [render a nested
 template](https://github.com/arafatm/Book-Programming-Phoenix/commit/ce7c5ee)
 
 ## Chapter 4: Ecto and Changesets
+
 ### Understanding Ecto
+
+Ecto:
+- wraper for RDBMS
+- encapsulated query language
+- **changesets** 
+
+[Reenable Ecto](https://github.com/arafatm/Book-Programming-Phoenix/commit/9890d0b)
+
+`mix ecto.create` to create the repo
+
 ### Defining the User Schema and Migration
+
+1. [Model User - define schema](https://github.com/arafatm/Book-Programming-Phoenix/commit/99b173d)
+2. [$ mix ecto.gen.migration create_user](https://github.com/arafatm/Book-Programming-Phoenix/commit/2a04b16)
+3. [Screwed up the migration.  Fixed](https://github.com/arafatm/Book-Programming-Phoenix/commit/543c2df)
+4. `mix ecto.migrate`
+
+Test out in `iex -S mix`
+```
+Repo.insert(%User{ name: "José", username: "josevalim", password_hash: "<3<3elixir" })
+
+Repo.all(User)
+
+Repo.get(User, 1)
+```
+
 ### Using the Repository to Add Data
 ### Building Forms
 ### Creating Resources
