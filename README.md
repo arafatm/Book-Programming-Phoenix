@@ -177,8 +177,6 @@ This refers to `def view` in `web/web.ex`
 Refactor duplication by [render a nested 
 template](https://github.com/arafatm/Book-Programming-Phoenix/commit/ce7c5ee)
 
-### Wrapping Up
-
 ## Chapter 4: Ecto and Changesets
 ### Understanding Ecto
 ### Defining the User Schema and Migration
