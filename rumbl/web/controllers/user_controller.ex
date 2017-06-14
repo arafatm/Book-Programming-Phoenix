@@ -18,7 +18,7 @@ defmodule Rumbl.UserController do
 
   def create(conn, %{"user" => user_params}) do
 
-    changeset = Rumbl.User.changeset(%Rumbl.User{}, user_params)
+    changeset = Rumbl.User.registration_changeset(%Rumbl.User{}, user_params)
 
     case Repo.insert(changeset) do
 
