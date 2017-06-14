@@ -211,11 +211,16 @@ Repo.get(User, 1)
 1.  [UserController.new](https://github.com/arafatm/Book-Programming-Phoenix/commit/5c7e1af)
 2.  [User.changeset](https://github.com/arafatm/Book-Programming-Phoenix/commit/8659e94)
 3.  [Router: resources "/users"](https://github.com/arafatm/Book-Programming-Phoenix/commit/9ea506f)
+4.  [New User form](https://github.com/arafatm/Book-Programming-Phoenix/commit/f186b89)
+
 
 To view currently defined routes `mix phoenix.routes`
 
-### Building Forms
 ### Creating Resources
+
+1.  [UserController.create](https://github.com/arafatm/Book-Programming-Phoenix/commit/c528d4d)
+2. [Handle UserController.create validation errors](https://github.com/arafatm/Book-Programming-Phoenix/commit/a953de1)
+
 ### Wrapping Up
 
 ## Chapter 5: Authenticating Users
