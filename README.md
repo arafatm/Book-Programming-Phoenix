@@ -221,14 +221,102 @@ To view currently defined routes `mix phoenix.routes`
 1.  [UserController.create](https://github.com/arafatm/Book-Programming-Phoenix/commit/c528d4d)
 2. [Handle UserController.create validation errors](https://github.com/arafatm/Book-Programming-Phoenix/commit/a953de1)
 
-### Wrapping Up
-
 ## Chapter 5: Authenticating Users
+
 ### Preparing for Authentication
+
+Use [Comeonin library](https://github.com/riverrun/comeonin) for hashing
+
+[Add comeonin package to handle password hashing](https://github.com/arafatm/Book-Programming-Phoenix/commit/775faa9)
+- [$ mix deps.get](https://github.com/arafatm/Book-Programming-Phoenix/commit/6f7b7fb)
+
+
 ### Managing Registration Changesets
+
+[User.registration_changeset validates and hashes password](https://github.com/arafatm/Book-Programming-Phoenix/commit/f845ddd)
+
 ### Creating Users
+
+[UserController use registration_changeset](https://github.com/arafatm/Book-Programming-Phoenix/commit/38f6e04)
+
 ### The Anatomy of a Plug
+
+2 types of plugs: function or module
+
+**function plugs**
+- provides single function
+- e.g. `plug :protect_from_forgery` in `web/router.ex`
+- specified with name of function _as atom_
+
+**module plugs**
+- provides 2 functions `init` and `call` with some config
+- e.g. `plug Plug.Logger` in `lib/rumbl/endpoint.ex`
+- specified with _module name_
+- `init` is compile-time
+- `call` is run-time
+
+template for module plug
+```elixir
+defmodule MyPlug do
+  def init(opts) do         # compile-time and passes opts to call
+    opts
+  end
+
+  def call(conn, _opts) do  # run time
+    conn
+  end
+end
+```
+
+All plugs **receive** a `conn` and **return** a `conn`
+
+`conn` is a [Plug.Conn](https://hexdocs.pm/plug/Plug.Conn.html)
+
+Plug.Conn request fields contain information about *inbound request* e.g.
+- `host` e.g. www.pragprog.com
+- `method` e.g. GET or POST
+- `path_info` path split into list e.g. ['admin', 'users']
+- `req_headers` request headers e.g. [{"content-type", "text/plain"}]
+- `scheme` request protocol as atom e.g. :https
+- others
+
+Plug.conn *fetchable fields* e.g.
+- `cookies` req/resp cookies
+- `params` parsed from query string or req body
+
+Plug.Conn fields to *process web requests* e.g.
+- `assigns` map containing your data
+- `halted` flag set when conn is halted e.g. failed authorization
+- `state` of the connection e.g. :set, :sent, etc
+
+Plug.Conn *response* fields e.g.
+- `resp_body` http response string
+- `resp_cookies` outbound cookies
+- `resp_headers` HTTP headers e.g. response type, caching, etc
+- `status` code e.g. 404
+
+Plug.conn *private* fields e.g.
+- `adapter` info
+- `private` map for private use
+
+Plug.conn starts *blank* and is filled out progressively by different plugs in 
+the pipeline
+
 ### Writing an Authentication Plug
+
+[Rumbl.Auth plug to authenticate user](https://github.com/arafatm/Book-Programming-Phoenix/commit/ebb2353)
+
+[Router pipeline add Rumbl.Auth plug](https://github.com/arafatm/Book-Programming-Phoenix/commit/1849c6c)
+
+[UserController authenticate user and restrict acces to :index](https://github.com/arafatm/Book-Programming-Phoenix/commit/cc056d2)
+
+[UserController change authenticate method into a plug function](https://github.com/arafatm/Book-Programming-Phoenix/commit/aa750d9)
+
+:boom: use of `halt()`. Plugs explicitly check for `halted: true` between every 
+plug invocation
+
+[Rumbl.Auth.login method to auto-login when a new user is created](https://github.com/arafatm/Book-Programming-Phoenix/commit/75f151b)
+
 ### Implementing Login and Logout
 ### Presenting User Account Links
 ### Wrapping Up
