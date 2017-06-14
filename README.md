@@ -207,6 +207,13 @@ Repo.get(User, 1)
 ```
 
 ### Using the Repository to Add Data
+
+1.  [UserController.new](https://github.com/arafatm/Book-Programming-Phoenix/commit/5c7e1af)
+2.  [User.changeset](https://github.com/arafatm/Book-Programming-Phoenix/commit/8659e94)
+3.  [Router: resources "/users"](https://github.com/arafatm/Book-Programming-Phoenix/commit/9ea506f)
+
+To view currently defined routes `mix phoenix.routes`
+
 ### Building Forms
 ### Creating Resources
 ### Wrapping Up
