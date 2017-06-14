@@ -19,7 +19,6 @@ defmodule Rumbl.Auth do
     |> configure_session(renew: true) # resets session to protect from session fixation attack
   end
 
-
   def login_by_username_and_pass(conn, username, given_pass, opts) do
     repo = Keyword.fetch!(opts, :repo)
     user = repo.get_by(Rumbl.User, username: username)
@@ -34,4 +33,9 @@ defmodule Rumbl.Auth do
         {:error, :not_found, conn}
     end
   end
+
+  def logout(conn) do
+    configure_session(conn, drop: true)
+  end
+
 end
