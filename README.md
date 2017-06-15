@@ -318,14 +318,31 @@ plug invocation
 [Rumbl.Auth.login method to auto-login when a new user is created](https://github.com/arafatm/Book-Programming-Phoenix/commit/75f151b)
 
 ### Implementing Login and Logout
+
+[Login implementation](https://github.com/arafatm/Book-Programming-Phoenix/commit/529859e)
+
 ### Presenting User Account Links
-### Wrapping Up
+
+[App Layout: display logged in user and logout link](https://github.com/arafatm/Book-Programming-Phoenix/commit/cd4c051)
+
+[Implement logout functionality](https://github.com/arafatm/Book-Programming-Phoenix/commit/6dd8e15)
 
 ## Chapter 6: Generators and Relationships
+
 ### Using Generators
+
+[$ mix phoenix.gen.html Video videos user_id:references:users url:string title:string description:text](https://github.com/arafatm/Book-Programming-Phoenix/commit/7a3726c)
+
+[Route recources /videos](https://github.com/arafatm/Book-Programming-Phoenix/commit/d0dcbea)
+
+`mix ecto.migrate` to update the repository
+
+[Rumbl.Auth.authenticate_user when scope /manage](https://github.com/arafatm/Book-Programming-Phoenix/commit/403ef46)
+
 ### Building Relationships
 ### Managing Related Data
 ### Wrapping Up
+
 
 ## Chapter 7: Ecto Queries and Constraints
 ### Adding Categories
