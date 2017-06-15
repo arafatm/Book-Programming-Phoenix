@@ -339,8 +339,25 @@ plug invocation
 
 [Rumbl.Auth.authenticate_user when scope /manage](https://github.com/arafatm/Book-Programming-Phoenix/commit/403ef46)
 
+[ID10t error: Router needs Rumbl.Auth.authenticate_user](https://github.com/arafatm/Book-Programming-Phoenix/commit/e022f6a)
+
 ### Building Relationships
+
+[User has_many Video](https://github.com/arafatm/Book-Programming-Phoenix/commit/a79d62a)
+
+Associations are explicit. To ensure associated records are fetched 
+`Repo.preload/2`
+
+Another method is to `q = Ecto.assoc/2` to fetch assoc data without storing 
+them in primary struct. Then `Repo.all(q)` to get data in it's own struct
+
 ### Managing Related Data
+
+[Phoenix.Controller has `action/2` that can be overridden](https://hexdocs.pm/phoenix/Phoenix.Controller.html)
+
+[VideoController CRUD with User association](https://github.com/arafatm/Book-Programming-Phoenix/commit/6c74a24)
+- :boom: overriding of `action(conn, _)`
+
 ### Wrapping Up
 
 
