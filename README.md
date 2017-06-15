@@ -358,11 +358,54 @@ them in primary struct. Then `Repo.all(q)` to get data in it's own struct
 [VideoController CRUD with User association](https://github.com/arafatm/Book-Programming-Phoenix/commit/6c74a24)
 - :boom: overriding of `action(conn, _)`
 
-### Wrapping Up
-
-
 ## Chapter 7: Ecto Queries and Constraints
+
 ### Adding Categories
+
+[$ mix phoenix.gen.model Category categories name:string](https://github.com/arafatm/Book-Programming-Phoenix/commit/dc741bc)
+
+[Migrations.CreateCategory :name is required and unique](https://github.com/arafatm/Book-Programming-Phoenix/commit/7a08b9d)
+
+[Video belongs_to Category && set required/optional fields](https://github.com/arafatm/Book-Programming-Phoenix/commit/9404f06)
+
+[`$ mix ecto.gen.migration add_category_id_to_video`](https://github.com/arafatm/Book-Programming-Phoenix/commit/f9bc4a9)
+
+[migration to add category_id to videos](https://github.com/arafatm/Book-Programming-Phoenix/commit/f547287)
+
+[Migration create category typo](https://github.com/arafatm/Book-Programming-Phoenix/commit/55db277)
+
+`$ mix ecto.migrate`
+
+[Seed categories](https://github.com/arafatm/Book-Programming-Phoenix/commit/434f158)
+
+`$ mix run priv/repo/seeds.exs`
+
+[Seed Category: Check for existing record to avoid inserting duplicate](https://github.com/arafatm/Book-Programming-Phoenix/commit/5265b73)
+
+Example of how to query db with Ecto.Query
+
+```elixir
+import Ecto.Query
+alias Rumbl.Repo
+alias Rumbl.Category
+
+Repo.all from c in Category
+
+Repo.all from c in Category,
+  order_by: c.name,
+  select: {c.name, c.id}
+
+ # Composable query example
+q = Category
+q = from c in q, order_by: c.name
+q = from c in q, select: {c.name, c.id}
+Repo.all q
+```
+
+[Category queryables alphabetical && names_and_ids](https://github.com/arafatm/Book-Programming-Phoenix/commit/f952fde)
+
+[Video display Categories](https://github.com/arafatm/Book-Programming-Phoenix/commit/6f1d2ae)
+
 ### Diving Deeper into Ecto Queries
 ### Constraints
 ### Wrapping Up
