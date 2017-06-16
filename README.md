@@ -1,5 +1,7 @@
 #  Programming Phoenix
 
+[epub](https://drive.google.com/file/d/0BwjXv3TJiWYEYUdaamZxVGd1ZzA/view?usp=sharing)
+
 # Part 1: Building with Functional MVC
 
 In Part I, well talk about traditional request/response web applications
@@ -126,18 +128,18 @@ iex> alias Rumbl.User
 iex> alias Rumbl.Repo
 
 iex> Repo.all User
-    [%Rumbl.User{id: '1', name: 'José', password: 'elixir', username: 'josevalim'},
-     %Rumbl.User{id: '3', name: 'Chris', password: 'phoenix', username: 'cmccord'},
-     %Rumbl.User{id: '2', name: 'Bruce', password: '7langs', username: 'redrapids'}]
+    [%Rumbl.User{id: "1", name: "José", password: "elixir", username: "josevalim"},
+     %Rumbl.User{id: "3", name: "Chris", password: "phoenix", username: "cmccord"},
+     %Rumbl.User{id: "2", name: "Bruce", password: "7langs", username: "redrapids"}]
 
 iex> Repo.all Rumbl.Other
     []
 
-iex> Repo.get User, '1'
-    %Rumbl.User{id: '1', name: 'José', password: 'elixir', username: 'josevalim'}
+iex> Repo.get User, "1"
+    %Rumbl.User{id: "1", name: "José", password: "elixir", username: "josevalim"}
 
-iex> Repo.get_by User, name: 'Bruce'
-    %Rumbl.User{id: '2', name: 'Bruce', password: '7langs', username: 'redrapids'}
+iex> Repo.get_by User, name: "Bruce"
+    %Rumbl.User{id: "2", name: "Bruce", password: "7langs", username: "redrapids"}
 ```
 
 ### Building a Controller
@@ -155,15 +157,15 @@ Standard actions: `:show`, `:index`, `:new`, `:create`, `:edit`, `:update`, `:de
 
 We can test helpers in `iex`
 ```elixir
-iex> Phoenix.HTML.Link.link('Home', to: '/')
-    {:safe, ['<a href=\'/\'>', 'Home', '</a>']}
+iex> Phoenix.HTML.Link.link("Home", to: "/")
+    {:safe, ["<a href=\"/\">", "Home", "</a>"]}
 
-iex> Phoenix.HTML.Link.link('Delete', to: '/', method: 'delete')
+iex> Phoenix.HTML.Link.link("Delete", to: "/", method: "delete")
     {:safe,
-    [['<form action=\'/\' class=\'link\' method=\'post\'>',
-      '<input name=\'_method\' type=\'hidden\' value=\'delete\'>
-      <input name=\'_csrf_token\' type=\'hidden\' value=\'UhdjBFUcOh...\'>'],
-     ['<a data-submit=\'parent\' href=\'#\'>', '[x]', '</a>'], '</form>']}
+    [["<form action=\"/\" class=\"link\" method=\"post\">",
+      "<input name=\"_method\" type=\"hidden\" value=\"delete\">
+      <input name=\"_csrf_token\" type=\"hidden\" value=\"UhdjBFUcOh...\">"],
+     ["<a data-submit=\"parent\" href=\"#\">", "[x]", "</a>"], "</form>"]}
 ```
 
 In views e.g. `web/views/user_view.ex` we see at the top `use Rumbl.Web, :view`
@@ -275,7 +277,7 @@ All plugs **receive** a `conn` and **return** a `conn`
 Plug.Conn request fields contain information about *inbound request* e.g.
 - `host` e.g. www.pragprog.com
 - `method` e.g. GET or POST
-- `path_info` path split into list e.g. ['admin', 'users']
+- `path_info` path split into list e.g. ["admin", "users"]
 - `req_headers` request headers e.g. [{"content-type", "text/plain"}]
 - `scheme` request protocol as atom e.g. :https
 - others
@@ -349,7 +351,7 @@ Associations are explicit. To ensure associated records are fetched
 `Repo.preload/2`
 
 Another method is to `q = Ecto.assoc/2` to fetch assoc data without storing 
-them in primary struct. Then `Repo.all(q)` to get data in it's own struct
+them in primary struct. Then `Repo.all(q)` to get data in its own struct
 
 ### Managing Related Data
 
@@ -407,17 +409,156 @@ Repo.all q
 [Video display Categories](https://github.com/arafatm/Book-Programming-Phoenix/commit/6f1d2ae)
 
 ### Diving Deeper into Ecto Queries
+
+Keep functions with **side effects in the controller**. Model and view should 
+be side effect free
+
+Writing Ecto queries
+
+```elixir
+import Ecto.Query
+alias Rumbl.{Repo, User}
+
+username = "arafatm"
+
+Repo.one(from u in User, where: u.username == ^username)
+
+Repo.one from u in User,
+  select: count(u.id),
+  where: ilike(u.username, ^"a%") or ilike(u.username, ^"c%")
+
+users_count = from u in User, select: count(u.id)
+
+#Can use previous result to keep building on the query
+
+a_users = from u in users_count, where: ilike(u.username, ^"%a%")
+
+Repo.all a_users
+```
+
+Queries with Pipe Syntax
+
+```elixir
+User |>
+select([u], count(u.id)) |>
+where([u], ilike(u.username, ^"a%") or ilike(u.username, ^"m%")) |>
+Repo.one()
+```
+
+Ecto **Fragments** allow construction of a SQL fragment.
+
+```elixir
+uname = "arafat"
+
+u = from(u in User,
+    where: fragment("lower(username) = ?", ^String.downcase(uname)))
+
+Repo.all(u)
+```
+
+Querying Relationships
+
+```elixir
+user = Repo.one from(u in User, limit: 1)
+
+user.videos
+
+user = Repo.preload(user, :videos)
+
+user.videos
+
+user = Repo.one from(u in User, limit: 1, preload: [:videos])
+
+user.videos
+
+Repo.all from u in User,
+  join: v in assoc(u, :videos),
+  join: c in assoc(v, :category),
+  where: c.name == "Comedy",
+  select: {u, v}
+```
+
 ### Constraints
-### Wrapping Up
+
+Given `create unique_index(:users, [:username])` in the migration CreateUsers 
+migration, if we try to create a duplicate user we get a `constraint error ... 
+* unique: users_username_index`
+
+The terminal will show a `(Ecto.ConstraintError)`
+
+We can display the error `unique_constraint(:username)` in the User model
+
+[User changeset validates unique_constraint](https://github.com/arafatm/Book-Programming-Phoenix/commit/79bac03)
+
+Similarly we can validate foreign keys with `assoc_constriant(:category)` in 
+Video model
+
+[Video assoc_constraint category](https://github.com/arafatm/Book-Programming-Phoenix/commit/c6a7794)
+
+```elixir
+alias Rumbl.Category
+alias Rumbl.Video
+alias Rumbl.Repo
+import Ecto.Query
+category = Repo.get_by Category, name: "Drama"
+video = Repo.one(from v in Video, limit: 1)
+
+#Test valid category
+changeset = Video.changeset(video, %{category_id: category.id})
+Repo.update(changeset)
+
+#Test invalid category
+changeset = Video.changeset(video, %{category_id: 12345})
+Repo.update(changeset)
+
+#inspect error changeset
+{:error, changeset} = v(-1)
+changeset.errors
+```
+
+:boom: [Display errors on view](https://github.com/arafatm/Book-Programming-Phoenix/commit/b4d61d8)
 
 ## Chapter 8: Testing MVC
-### Understanding ExUnit
+
 ### Using Mix to Run Phoenix Tests
+
+**Set up continuous testing**
+- [Continuous testing with mix test watch](https://github.com/arafatm/Book-Programming-Phoenix/commit/d2f1d63)
+-[Clear terminal on each test run](https://github.com/arafatm/Book-Programming-Phoenix/commit/ac8644c)
+- `mix deps.update`
+- `mix test.watch`
+
+Delete VideoControllerTest for now
+[delete VideoControllerTest](https://github.com/arafatm/Book-Programming-Phoenix/commit/7378ed8)
+
+Fix failing PageControllerTest
+[PageControllerTest GET /](https://github.com/arafatm/Book-Programming-Phoenix/commit/95ba2d2)
+
+[TestHelpers insert_user  and insert_video](https://github.com/arafatm/Book-Programming-Phoenix/commit/dd350a7)
+
+[VideoControllerTest requires user authentication on all actions](https://github.com/arafatm/Book-Programming-Phoenix/commit/cec2f22)
+
+[AuthController allow easier authentication](https://github.com/arafatm/Book-Programming-Phoenix/commit/1c22b51)
+
+[VideoControllerTest passing tests](https://github.com/arafatm/Book-Programming-Phoenix/commit/e381f38)
+
+Using tags to separate tests requiring login
+[VideoControllerTest tag login_as](https://github.com/arafatm/Book-Programming-Phoenix/commit/07a7f52)
+
+We can now run tests by specific tag
+`$ mix test test/controllers --only login_as`
+
+[VideoControllerTest video creation](https://github.com/arafatm/Book-Programming-Phoenix/commit/a4141fe)
+
+[VideoControllerTest authorize actions against access by other users](https://github.com/arafatm/Book-Programming-Phoenix/commit/3ed940a)
+
 ### Integration Tests
 ### Unit-Testing Plugs
 ### Testing Views and Templates
 ### Splitting Side Effects in Model Tests
 ### Wrapping Up
+
+**TODO: Fix deprecation warnings**
 
 # Part 2: Writing Interactive and Maintainable Applications
 
