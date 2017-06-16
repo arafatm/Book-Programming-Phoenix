@@ -8,8 +8,15 @@ defmodule Rumbl.Auth do
 
   def call(conn, repo) do
     user_id = get_session(conn, :user_id)
-    user    = user_id && repo.get(Rumbl.User, user_id) # lookup user if user_id exists
-    assign(conn, :current_user, user)
+
+    cond do
+      user = conn.assigns[:current_user] -> # User already assigned. Used for easier testing
+        conn
+      user = user_id && repo.get(Rumbl.User, user_id) -> # lookup user if user_id exists
+        assign(conn, :current_user, user)
+      true ->
+        assign(conn, :current_user, nil)
+    end
   end
 
   def login(conn, user) do
