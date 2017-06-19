@@ -1,6 +1,6 @@
 #  Programming Phoenix
 
-[epub](https://drive.google.com/file/d/0BwjXv3TJiWYEYUdaamZxVGd1ZzA/view?usp=sharing)
+[epub](https://github.com/arafatm/Books/blob/master/langs/elixir/programming%20phoenix%20(for%20arafat%20mohamed)_chris%20mcc.epub)
 
 # Part 1: Building with Functional MVC
 
@@ -534,6 +534,8 @@ Delete VideoControllerTest for now
 Fix failing PageControllerTest
 [PageControllerTest GET /](https://github.com/arafatm/Book-Programming-Phoenix/commit/95ba2d2)
 
+### Integration Tests
+
 [TestHelpers insert_user  and insert_video](https://github.com/arafatm/Book-Programming-Phoenix/commit/dd350a7)
 
 [VideoControllerTest requires user authentication on all actions](https://github.com/arafatm/Book-Programming-Phoenix/commit/cec2f22)
@@ -552,8 +554,32 @@ We can now run tests by specific tag
 
 [VideoControllerTest authorize actions against access by other users](https://github.com/arafatm/Book-Programming-Phoenix/commit/3ed940a)
 
-### Integration Tests
+[Remove deprecation warnings](https://github.com/arafatm/Book-Programming-Phoenix/commit/c20fabd)
+
 ### Unit-Testing Plugs
+
+Test `Rumbl.Auth`
+
+[Rumbl.AuthTest initial authentication tests](https://github.com/arafatm/Book-Programming-Phoenix/commit/fc7c7bd)
+
+First error: `Auth.authenticate_user` expects a `:current_user` 
+
+```
+test authenticate_user halts when no current_user exists (Rumbl.AuthTest)
+  test/controllers/auth_test.exs:5
+  ** (KeyError) key :current_user not found in: %{}
+```
+
+[Rumbl.AuthTest authenticate_user expects :current_user](https://github.com/arafatm/Book-Programming-Phoenix/commit/a7bf642)
+
+next error
+
+```
+test authenticate_user halts when no current_user exists (Rumbl.AuthTest)
+    test/controllers/auth_test.exs:5
+    ** (ArgumentError) flash not fetched, call fetch_flash/2
+```
+
 ### Testing Views and Templates
 ### Splitting Side Effects in Model Tests
 ### Wrapping Up
