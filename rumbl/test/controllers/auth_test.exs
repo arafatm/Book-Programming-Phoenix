@@ -3,7 +3,10 @@ defmodule Rumbl.AuthTest do
   alias Rumbl.Auth
 
   test 'authenticate_user halts when no current_user exists', %{conn: conn} do
-    conn = Auth.authenticate_user(conn, [])
+    conn =
+      conn
+      |> assign(:current_user, nil)
+      |> Auth.authenticate_user([])
     assert conn.halted
   end
 
