@@ -12,10 +12,13 @@ defmodule Rumbl.Video do
     timestamps()
   end
 
+  @required_fields [:url, :title, :description]
+  @optional_fields [:category_id]
+
   def changeset(model, params \\ :empty) do
     model
-    |> cast(params, [:url, :title, :description, :category_id])
-    |> validate_required([:url, :title, :description])
+    |> cast(params, @required_fields ++ @optional_fields)
+    |> validate_required(@required_fields)
     |> assoc_constraint(:category)
   end
 end
