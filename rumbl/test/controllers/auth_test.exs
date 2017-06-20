@@ -55,4 +55,9 @@ defmodule Rumbl.AuthTest do
 
     assert conn.assigns.current_user.id == user.id
   end
+
+  test "call with no session sets current_user assign to nil", %{conn: conn} do
+    conn = Auth.call(conn, Repo)
+    assert conn.assigns.current_user == nil
+  end
 end
