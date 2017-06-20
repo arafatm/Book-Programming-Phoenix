@@ -1,6 +1,6 @@
 #  Programming Phoenix
 
-[epub](https://github.com/arafatm/Books/blob/master/langs/elixir/programming%20phoenix%20(for%20arafat%20mohamed)_chris%20mcc.epub)
+:shipit: [epub](https://github.com/arafatm/Books/blob/master/langs/elixir/programming%20phoenix%20(for%20arafat%20mohamed)_chris%20mcc.epub)
 
 # Part 1: Building with Functional MVC
 
@@ -45,7 +45,7 @@ mix phoenix.server
 
 ### Building a Feature
 
-[get /hello](https://github.com/arafatm/Book-Programming-Phoenix/commit/dd46353)
+:shipit: [get /hello](https://github.com/arafatm/Book-Programming-Phoenix/commit/dd46353)
 - Add a route `/hello`
 - Add a `controllers/hello_controller.ex`
 - Add a `views/hello_view.ex`
@@ -53,7 +53,7 @@ mix phoenix.server
 
 :boom: when you update the template the browser autoreloads
 
-[get /hello/:name - add a parameter to the request](https://github.com/arafatm/Book-Programming-Phoenix/commit/9824626)
+:shipit: [get /hello/:name - add a parameter to the request](https://github.com/arafatm/Book-Programming-Phoenix/commit/9824626)
 
 ### Going Deeper: The Request Pipeline
 
@@ -94,7 +94,7 @@ Environment & endpoints
 e.g. [line 13 defines the 
 Endpoint](https://github.com/arafatm/Book-Programming-Phoenix/blob/090ae4ee0fc1dd40aed91a66d95ac627c47fd8af/hello/config/config.exs)
 which points to 
-[lib/hello.endpoints.ex](https://github.com/arafatm/Book-Programming-Phoenix/blob/090ae4ee0fc1dd40aed91a66d95ac627c47fd8af/hello/lib/hello/endpoint.ex)
+:shipit: [lib/hello.endpoints.ex](https://github.com/arafatm/Book-Programming-Phoenix/blob/090ae4ee0fc1dd40aed91a66d95ac627c47fd8af/hello/lib/hello/endpoint.ex)
 
 Typical Phoenix app looks like
 ```
@@ -110,17 +110,17 @@ connection
 ### The Controller
 
 Create new Rumbl app
-[$ mix phoenix.new rumbl && cd rumbl && mix ecto.create](https://github.com/arafatm/Book-Programming-Phoenix/commit/5e0951e)
+:shipit: [$ mix phoenix.new rumbl && cd rumbl && mix ecto.create](https://github.com/arafatm/Book-Programming-Phoenix/commit/5e0951e)
 
-[Set "Rumbl.io" on home page](https://github.com/arafatm/Book-Programming-Phoenix/commit/072fde3)
+:shipit: [Set "Rumbl.io" on home page](https://github.com/arafatm/Book-Programming-Phoenix/commit/072fde3)
 
 ### Creating Some Users
 
-[Model User: id, name, username, password](https://github.com/arafatm/Book-Programming-Phoenix/commit/ab19713)
+:shipit: [Model User: id, name, username, password](https://github.com/arafatm/Book-Programming-Phoenix/commit/ab19713)
 
-[Model User access functions](https://github.com/arafatm/Book-Programming-Phoenix/commit/0ab380d)
+:shipit: [Model User access functions](https://github.com/arafatm/Book-Programming-Phoenix/commit/0ab380d)
 
-[Disable Ecto for now](https://github.com/arafatm/Book-Programming-Phoenix/commit/571e9d7)
+:shipit: [Disable Ecto for now](https://github.com/arafatm/Book-Programming-Phoenix/commit/571e9d7)
 
 To Test out
 ```elixir
@@ -146,11 +146,11 @@ iex> Repo.get_by User, name: "Bruce"
 
 Standard actions: `:show`, `:index`, `:new`, `:create`, `:edit`, `:update`, `:delete`
 
-[UserController get /users](https://github.com/arafatm/Book-Programming-Phoenix/commit/42fc696)
+:shipit: [UserController get /users](https://github.com/arafatm/Book-Programming-Phoenix/commit/42fc696)
 
 ### Coding Views
 
-[get /users display all users and link to user/:id](https://github.com/arafatm/Book-Programming-Phoenix/commit/6969425)
+:shipit: [get /users display all users and link to user/:id](https://github.com/arafatm/Book-Programming-Phoenix/commit/6969425)
 - Fix: [display User.name, not User.username](https://github.com/arafatm/Book-Programming-Phoenix/commit/ae74a65)
 
 ### Using Helpers
@@ -174,7 +174,7 @@ This refers to `def view` in `web/web.ex`
 
 ### Showing a User
 
-[get /user/:id](https://github.com/arafatm/Book-Programming-Phoenix/commit/b113020)
+:shipit: [get /user/:id](https://github.com/arafatm/Book-Programming-Phoenix/commit/b113020)
 
 Refactor duplication by [render a nested 
 template](https://github.com/arafatm/Book-Programming-Phoenix/commit/ce7c5ee)
@@ -188,7 +188,7 @@ Ecto:
 - encapsulated query language
 - **changesets** 
 
-[Reenable Ecto](https://github.com/arafatm/Book-Programming-Phoenix/commit/9890d0b)
+:shipit: [Reenable Ecto](https://github.com/arafatm/Book-Programming-Phoenix/commit/9890d0b)
 
 `mix ecto.create` to create the repo
 
@@ -229,17 +229,17 @@ To view currently defined routes `mix phoenix.routes`
 
 Use [Comeonin library](https://github.com/riverrun/comeonin) for hashing
 
-[Add comeonin package to handle password hashing](https://github.com/arafatm/Book-Programming-Phoenix/commit/775faa9)
+:shipit: [Add comeonin package to handle password hashing](https://github.com/arafatm/Book-Programming-Phoenix/commit/775faa9)
 - [$ mix deps.get](https://github.com/arafatm/Book-Programming-Phoenix/commit/6f7b7fb)
 
 
 ### Managing Registration Changesets
 
-[User.registration_changeset validates and hashes password](https://github.com/arafatm/Book-Programming-Phoenix/commit/f845ddd)
+:shipit: [User.registration_changeset validates and hashes password](https://github.com/arafatm/Book-Programming-Phoenix/commit/f845ddd)
 
 ### Creating Users
 
-[UserController use registration_changeset](https://github.com/arafatm/Book-Programming-Phoenix/commit/38f6e04)
+:shipit: [UserController use registration_changeset](https://github.com/arafatm/Book-Programming-Phoenix/commit/38f6e04)
 
 ### The Anatomy of a Plug
 
@@ -306,46 +306,46 @@ the pipeline
 
 ### Writing an Authentication Plug
 
-[Rumbl.Auth plug to authenticate user](https://github.com/arafatm/Book-Programming-Phoenix/commit/ebb2353)
+:shipit: [Rumbl.Auth plug to authenticate user](https://github.com/arafatm/Book-Programming-Phoenix/commit/ebb2353)
 
-[Router pipeline add Rumbl.Auth plug](https://github.com/arafatm/Book-Programming-Phoenix/commit/1849c6c)
+:shipit: [Router pipeline add Rumbl.Auth plug](https://github.com/arafatm/Book-Programming-Phoenix/commit/1849c6c)
 
-[UserController authenticate user and restrict acces to :index](https://github.com/arafatm/Book-Programming-Phoenix/commit/cc056d2)
+:shipit: [UserController authenticate user and restrict acces to :index](https://github.com/arafatm/Book-Programming-Phoenix/commit/cc056d2)
 
-[UserController change authenticate method into a plug function](https://github.com/arafatm/Book-Programming-Phoenix/commit/aa750d9)
+:shipit: [UserController change authenticate method into a plug function](https://github.com/arafatm/Book-Programming-Phoenix/commit/aa750d9)
 
 :boom: use of `halt()`. Plugs explicitly check for `halted: true` between every 
 plug invocation
 
-[Rumbl.Auth.login method to auto-login when a new user is created](https://github.com/arafatm/Book-Programming-Phoenix/commit/75f151b)
+:shipit: [Rumbl.Auth.login method to auto-login when a new user is created](https://github.com/arafatm/Book-Programming-Phoenix/commit/75f151b)
 
 ### Implementing Login and Logout
 
-[Login implementation](https://github.com/arafatm/Book-Programming-Phoenix/commit/529859e)
+:shipit: [Login implementation](https://github.com/arafatm/Book-Programming-Phoenix/commit/529859e)
 
 ### Presenting User Account Links
 
-[App Layout: display logged in user and logout link](https://github.com/arafatm/Book-Programming-Phoenix/commit/cd4c051)
+:shipit: [App Layout: display logged in user and logout link](https://github.com/arafatm/Book-Programming-Phoenix/commit/cd4c051)
 
-[Implement logout functionality](https://github.com/arafatm/Book-Programming-Phoenix/commit/6dd8e15)
+:shipit: [Implement logout functionality](https://github.com/arafatm/Book-Programming-Phoenix/commit/6dd8e15)
 
 ## Chapter 6: Generators and Relationships
 
 ### Using Generators
 
-[$ mix phoenix.gen.html Video videos user_id:references:users url:string title:string description:text](https://github.com/arafatm/Book-Programming-Phoenix/commit/7a3726c)
+:shipit: [$ mix phoenix.gen.html Video videos user_id:references:users url:string title:string description:text](https://github.com/arafatm/Book-Programming-Phoenix/commit/7a3726c)
 
-[Route recources /videos](https://github.com/arafatm/Book-Programming-Phoenix/commit/d0dcbea)
+:shipit: [Route recources /videos](https://github.com/arafatm/Book-Programming-Phoenix/commit/d0dcbea)
 
 `mix ecto.migrate` to update the repository
 
-[Rumbl.Auth.authenticate_user when scope /manage](https://github.com/arafatm/Book-Programming-Phoenix/commit/403ef46)
+:shipit: [Rumbl.Auth.authenticate_user when scope /manage](https://github.com/arafatm/Book-Programming-Phoenix/commit/403ef46)
 
-[ID10t error: Router needs Rumbl.Auth.authenticate_user](https://github.com/arafatm/Book-Programming-Phoenix/commit/e022f6a)
+:shipit: [ID10t error: Router needs Rumbl.Auth.authenticate_user](https://github.com/arafatm/Book-Programming-Phoenix/commit/e022f6a)
 
 ### Building Relationships
 
-[User has_many Video](https://github.com/arafatm/Book-Programming-Phoenix/commit/a79d62a)
+:shipit: [User has_many Video](https://github.com/arafatm/Book-Programming-Phoenix/commit/a79d62a)
 
 Associations are explicit. To ensure associated records are fetched 
 `Repo.preload/2`
@@ -357,32 +357,32 @@ them in primary struct. Then `Repo.all(q)` to get data in its own struct
 
 [Phoenix.Controller has `action/2` that can be overridden](https://hexdocs.pm/phoenix/Phoenix.Controller.html)
 
-[VideoController CRUD with User association](https://github.com/arafatm/Book-Programming-Phoenix/commit/6c74a24)
+:shipit: [VideoController CRUD with User association](https://github.com/arafatm/Book-Programming-Phoenix/commit/6c74a24)
 - :boom: overriding of `action(conn, _)`
 
 ## Chapter 7: Ecto Queries and Constraints
 
 ### Adding Categories
 
-[$ mix phoenix.gen.model Category categories name:string](https://github.com/arafatm/Book-Programming-Phoenix/commit/dc741bc)
+:shipit: [$ mix phoenix.gen.model Category categories name:string](https://github.com/arafatm/Book-Programming-Phoenix/commit/dc741bc)
 
-[Migrations.CreateCategory :name is required and unique](https://github.com/arafatm/Book-Programming-Phoenix/commit/7a08b9d)
+:shipit: [Migrations.CreateCategory :name is required and unique](https://github.com/arafatm/Book-Programming-Phoenix/commit/7a08b9d)
 
-[Video belongs_to Category && set required/optional fields](https://github.com/arafatm/Book-Programming-Phoenix/commit/9404f06)
+:shipit: [Video belongs_to Category && set required/optional fields](https://github.com/arafatm/Book-Programming-Phoenix/commit/9404f06)
 
-[`$ mix ecto.gen.migration add_category_id_to_video`](https://github.com/arafatm/Book-Programming-Phoenix/commit/f9bc4a9)
+:shipit: [`$ mix ecto.gen.migration add_category_id_to_video`](https://github.com/arafatm/Book-Programming-Phoenix/commit/f9bc4a9)
 
-[migration to add category_id to videos](https://github.com/arafatm/Book-Programming-Phoenix/commit/f547287)
+:shipit: [migration to add category_id to videos](https://github.com/arafatm/Book-Programming-Phoenix/commit/f547287)
 
-[Migration create category typo](https://github.com/arafatm/Book-Programming-Phoenix/commit/55db277)
+:shipit: [Migration create category typo](https://github.com/arafatm/Book-Programming-Phoenix/commit/55db277)
 
 `$ mix ecto.migrate`
 
-[Seed categories](https://github.com/arafatm/Book-Programming-Phoenix/commit/434f158)
+:shipit: [Seed categories](https://github.com/arafatm/Book-Programming-Phoenix/commit/434f158)
 
 `$ mix run priv/repo/seeds.exs`
 
-[Seed Category: Check for existing record to avoid inserting duplicate](https://github.com/arafatm/Book-Programming-Phoenix/commit/5265b73)
+:shipit: [Seed Category: Check for existing record to avoid inserting duplicate](https://github.com/arafatm/Book-Programming-Phoenix/commit/5265b73)
 
 Example of how to query db with Ecto.Query
 
@@ -404,9 +404,9 @@ q = from c in q, select: {c.name, c.id}
 Repo.all q
 ```
 
-[Category queryables alphabetical && names_and_ids](https://github.com/arafatm/Book-Programming-Phoenix/commit/f952fde)
+:shipit: [Category queryables alphabetical && names_and_ids](https://github.com/arafatm/Book-Programming-Phoenix/commit/f952fde)
 
-[Video display Categories](https://github.com/arafatm/Book-Programming-Phoenix/commit/6f1d2ae)
+:shipit: [Video display Categories](https://github.com/arafatm/Book-Programming-Phoenix/commit/6f1d2ae)
 
 ### Diving Deeper into Ecto Queries
 
@@ -488,12 +488,12 @@ The terminal will show a `(Ecto.ConstraintError)`
 
 We can display the error `unique_constraint(:username)` in the User model
 
-[User changeset validates unique_constraint](https://github.com/arafatm/Book-Programming-Phoenix/commit/79bac03)
+:shipit: [User changeset validates unique_constraint](https://github.com/arafatm/Book-Programming-Phoenix/commit/79bac03)
 
 Similarly we can validate foreign keys with `assoc_constriant(:category)` in 
 Video model
 
-[Video assoc_constraint category](https://github.com/arafatm/Book-Programming-Phoenix/commit/c6a7794)
+:shipit: [Video assoc_constraint category](https://github.com/arafatm/Book-Programming-Phoenix/commit/c6a7794)
 
 ```elixir
 alias Rumbl.Category
@@ -529,38 +529,38 @@ changeset.errors
 - `mix test.watch`
 
 Delete VideoControllerTest for now
-[delete VideoControllerTest](https://github.com/arafatm/Book-Programming-Phoenix/commit/7378ed8)
+:shipit: [delete VideoControllerTest](https://github.com/arafatm/Book-Programming-Phoenix/commit/7378ed8)
 
 Fix failing PageControllerTest
-[PageControllerTest GET /](https://github.com/arafatm/Book-Programming-Phoenix/commit/95ba2d2)
+:shipit: [PageControllerTest GET /](https://github.com/arafatm/Book-Programming-Phoenix/commit/95ba2d2)
 
 ### Integration Tests
 
-[TestHelpers insert_user  and insert_video](https://github.com/arafatm/Book-Programming-Phoenix/commit/dd350a7)
+:shipit: [TestHelpers insert_user  and insert_video](https://github.com/arafatm/Book-Programming-Phoenix/commit/dd350a7)
 
-[VideoControllerTest requires user authentication on all actions](https://github.com/arafatm/Book-Programming-Phoenix/commit/cec2f22)
+:shipit: [VideoControllerTest requires user authentication on all actions](https://github.com/arafatm/Book-Programming-Phoenix/commit/cec2f22)
 
-[AuthController allow easier authentication](https://github.com/arafatm/Book-Programming-Phoenix/commit/1c22b51)
+:shipit: [AuthController allow easier authentication](https://github.com/arafatm/Book-Programming-Phoenix/commit/1c22b51)
 
-[VideoControllerTest passing tests](https://github.com/arafatm/Book-Programming-Phoenix/commit/e381f38)
+:shipit: [VideoControllerTest passing tests](https://github.com/arafatm/Book-Programming-Phoenix/commit/e381f38)
 
 Using tags to separate tests requiring login
-[VideoControllerTest tag login_as](https://github.com/arafatm/Book-Programming-Phoenix/commit/07a7f52)
+:shipit: [VideoControllerTest tag login_as](https://github.com/arafatm/Book-Programming-Phoenix/commit/07a7f52)
 
 We can now run tests by specific tag
 `$ mix test test/controllers --only login_as`
 
-[VideoControllerTest video creation](https://github.com/arafatm/Book-Programming-Phoenix/commit/a4141fe)
+:shipit: [VideoControllerTest video creation](https://github.com/arafatm/Book-Programming-Phoenix/commit/a4141fe)
 
-[VideoControllerTest authorize actions against access by other users](https://github.com/arafatm/Book-Programming-Phoenix/commit/3ed940a)
+:shipit: [VideoControllerTest authorize actions against access by other users](https://github.com/arafatm/Book-Programming-Phoenix/commit/3ed940a)
 
-[Remove deprecation warnings](https://github.com/arafatm/Book-Programming-Phoenix/commit/c20fabd)
+:shipit: [Remove deprecation warnings](https://github.com/arafatm/Book-Programming-Phoenix/commit/c20fabd)
 
 ### Unit-Testing Plugs
 
 Test `Rumbl.Auth`
 
-[Rumbl.AuthTest initial authentication tests](https://github.com/arafatm/Book-Programming-Phoenix/commit/fc7c7bd)
+:shipit: [Rumbl.AuthTest initial authentication tests](https://github.com/arafatm/Book-Programming-Phoenix/commit/fc7c7bd)
 
 First error: `Auth.authenticate_user` expects a `:current_user` 
 
@@ -570,7 +570,7 @@ test/controllers/auth_test.exs:5
 ** (KeyError) key :current_user not found in: %{}
 ```
 
-[Rumbl.AuthTest authenticate_user expects :current_user](https://github.com/arafatm/Book-Programming-Phoenix/commit/a7bf642)
+:shipit: [Rumbl.AuthTest authenticate_user expects :current_user](https://github.com/arafatm/Book-Programming-Phoenix/commit/a7bf642)
 
 next error
 
@@ -580,7 +580,7 @@ test/controllers/auth_test.exs:5
 ** (ArgumentError) flash not fetched, call fetch_flash/2
 ```
 
-[AuthTest: fix  error](https://github.com/arafatm/Book-Programming-Phoenix/commit/8a911ff)
+:shipit: [AuthTest: fix  error](https://github.com/arafatm/Book-Programming-Phoenix/commit/8a911ff)
 
 ```
 test authenticate_user halts when no current_user exists (Rumbl.AuthTest)
@@ -588,44 +588,118 @@ test/controllers/auth_test.exs:5
 ** (ArgumentError) session not fetched, call fetch_session/2
 ```
 
-[AuthTest use bypass_through to wire up needed transformations such as fetching sessiona and adding flash messages](https://github.com/arafatm/Book-Programming-Phoenix/commit/e82c6ee)
+:shipit: [AuthTest use bypass_through to wire up needed transformations such as fetching sessiona and adding flash messages](https://github.com/arafatm/Book-Programming-Phoenix/commit/e82c6ee)
 
-[AuthTest login puts the user in the session](https://github.com/arafatm/Book-Programming-Phoenix/commit/9697ace)
+:shipit: [AuthTest login puts the user in the session](https://github.com/arafatm/Book-Programming-Phoenix/commit/9697ace)
 
-[AuthTest logout drops the session](https://github.com/arafatm/Book-Programming-Phoenix/commit/7a8b74f)
+:shipit: [AuthTest logout drops the session](https://github.com/arafatm/Book-Programming-Phoenix/commit/7a8b74f)
 
-[AuthTest call with no session sets current user assign to nil](https://github.com/arafatm/Book-Programming-Phoenix/commit/124c4f7)
+:shipit: [AuthTest call with no session sets current user assign to nil](https://github.com/arafatm/Book-Programming-Phoenix/commit/124c4f7)
 
-[AuthTest login](https://github.com/arafatm/Book-Programming-Phoenix/commit/f073edc)
+:shipit: [AuthTest login](https://github.com/arafatm/Book-Programming-Phoenix/commit/f073edc)
 
-[Speed up tests by reducing number of hashing rounds](https://github.com/arafatm/Book-Programming-Phoenix/commit/97cda90)
+:shipit: [Speed up tests by reducing number of hashing rounds](https://github.com/arafatm/Book-Programming-Phoenix/commit/97cda90)
 
 ### Testing Views and Templates
 
-[VideoViewTest rendering index and new](https://github.com/arafatm/Book-Programming-Phoenix/commit/0697cae)
+:shipit: [VideoViewTest rendering index and new](https://github.com/arafatm/Book-Programming-Phoenix/commit/0697cae)
 
 ### Splitting Side Effects in Model Tests
 
-[UserTest valid and invalid attributes](https://github.com/arafatm/Book-Programming-Phoenix/commit/df689c9)
+:shipit: [UserTest valid and invalid attributes](https://github.com/arafatm/Book-Programming-Phoenix/commit/df689c9)
 
-[UserTest password registration and validation](https://github.com/arafatm/Book-Programming-Phoenix/commit/dd7a70b)
+:shipit: [UserTest password registration and validation](https://github.com/arafatm/Book-Programming-Phoenix/commit/dd7a70b)
 
 Test Repository due to **side effects**
 
-[UserRepoTest unique username](https://github.com/arafatm/Book-Programming-Phoenix/commit/e5b1aed)
+:shipit: [UserRepoTest unique username](https://github.com/arafatm/Book-Programming-Phoenix/commit/e5b1aed)
 
-[CategoryRepoTest we can sort categories alphabetically](https://github.com/arafatm/Book-Programming-Phoenix/commit/8f6ba8d)
-
-### Wrapping Up
-
-**TODO: Fix deprecation warnings**
+:shipit: [CategoryRepoTest we can sort categories alphabetically](https://github.com/arafatm/Book-Programming-Phoenix/commit/8f6ba8d)
 
 # Part 2: Writing Interactive and Maintainable Applications
 
 ## Chapter 9: Watching Videos
+
 ### Watching Videos
+
+:shipit: [layout app: link to my videos](https://github.com/arafatm/Book-Programming-Phoenix/commit/8a8675e)
+
+:shipit: [Watch video even if not logged in](https://github.com/arafatm/Book-Programming-Phoenix/commit/bd0f4d2)
+
+:shipit: [Forgot to show watch video](https://github.com/arafatm/Book-Programming-Phoenix/commit/b4439fa)
+
 ### Adding JavaScript
+
+Use [Brunch](http://brunch.io/) to build, transform, and minify JS. Brunch also 
+handles all assets such as CSS and images.
+
+Brunch structure in `web/static`
+```
+...
+├── assets
+├── css
+├── js
+├── vendor
+...
+```
+
+Everything in `assets` that doesn't need to be transformed. Build tool will 
+copy assets to `priv/static` to be served by `Phoenix.Static`
+
+`vendor` for 3rd party tools such as jQuery
+
+In `web/static/js/app.js` is this line `import "phoenix_html"`. This wraps 
+content of all JS files in `web/static/js` and collects them in 
+`priv/static/js/app.js`
+- Called using `static_path(@conn, "/js/app.js")` in 
+  `web/templates/layout/app.html.eex`
+
+Brunch config in `brunch-config.js`
+
+Brunch commands
+- `brunch build`
+- `brunch build --production`
+- `brunch watch`
+
+`brunch watch` is automatically run by Phoenix. See `config/dev.exs`
+
+:shipit: [Embed youtube videos](https://github.com/arafatm/Book-Programming-Phoenix/commit/01a6e3e)
+
 ### Creating Slugs
+
+**Slug** := URL-friendly identifier
+
+`mix ecto.gen.migration add_slug_to_video`
+
+:shipit: [Video slug](https://github.com/arafatm/Book-Programming-Phoenix/commit/60fd841)
+
+`mix ecto.migrate`
+
+To test out
+```
+iex> video = %Rumbl.Video{id: 1, slug: "hello"}
+  %Rumbl.Video{id: 1, slug: "hello", ...}
+iex> Rumbl.Router.Helpers.watch_path(%URI{}, :show, video)
+  "/watch/1-hello"
+
+iex> url = URI.parse("http://example.com/prefix")
+  %URI{...}
+iex> Rumbl.Router.Helpers.watch_path(url, :show, video)
+  "/prefix/watch/1-hello"
+iex> Rumbl.Router.Helpers.watch_url(url, :show, video)
+  "http://example.com/prefix/watch/1-hello"
+
+iex> url = Rumbl.Endpoint.struct_url
+  %URI{...}
+iex> Rumbl.Router.Helpers.watch_url(url, :show, video)
+  "http://localhost:4000/watch/1-hello"
+```
+
+We should be able to access our video at `http://.../1-hello` but we get an 
+error because `VideoController.show` expects an integer id
+
+:shipit: [Video extract id from slug](https://github.com/arafatm/Book-Programming-Phoenix/commit/9ecde5d)
+
 ### Wrapping Up
 
 ## Chapter 10: Using Channels
@@ -666,3 +740,5 @@ Test Repository due to **side effects**
 ### Good Luck
 
 ## You May Be Interested In
+
+https://subvisual.co/blog/posts/137-tutorial-deploying-elixir-applications-with-docker-and-digital-ocean/
