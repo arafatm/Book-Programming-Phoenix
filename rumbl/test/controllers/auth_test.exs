@@ -6,6 +6,7 @@ defmodule Rumbl.AuthTest do
     conn =
       conn
       |> assign(:current_user, nil)
+      |> fetch_flash()
       |> Auth.authenticate_user([])
     assert conn.halted
   end
