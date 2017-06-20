@@ -9,7 +9,7 @@ defmodule Rumbl.User do
 
     has_many :videos, Rumbl.Video
 
-    timestamps
+    timestamps()
   end
 
   def changeset(model, params \\ :empty) do
