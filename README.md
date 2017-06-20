@@ -566,8 +566,8 @@ First error: `Auth.authenticate_user` expects a `:current_user`
 
 ```
 test authenticate_user halts when no current_user exists (Rumbl.AuthTest)
-  test/controllers/auth_test.exs:5
-  ** (KeyError) key :current_user not found in: %{}
+test/controllers/auth_test.exs:5
+** (KeyError) key :current_user not found in: %{}
 ```
 
 [Rumbl.AuthTest authenticate_user expects :current_user](https://github.com/arafatm/Book-Programming-Phoenix/commit/a7bf642)
@@ -576,12 +576,46 @@ next error
 
 ```
 test authenticate_user halts when no current_user exists (Rumbl.AuthTest)
-    test/controllers/auth_test.exs:5
-    ** (ArgumentError) flash not fetched, call fetch_flash/2
+test/controllers/auth_test.exs:5
+** (ArgumentError) flash not fetched, call fetch_flash/2
 ```
 
+[AuthTest: fix  error](https://github.com/arafatm/Book-Programming-Phoenix/commit/8a911ff)
+
+```
+test authenticate_user halts when no current_user exists (Rumbl.AuthTest)
+test/controllers/auth_test.exs:5
+** (ArgumentError) session not fetched, call fetch_session/2
+```
+
+[AuthTest use bypass_through to wire up needed transformations such as fetching sessiona and adding flash messages](https://github.com/arafatm/Book-Programming-Phoenix/commit/e82c6ee)
+
+[AuthTest login puts the user in the session](https://github.com/arafatm/Book-Programming-Phoenix/commit/9697ace)
+
+[AuthTest logout drops the session](https://github.com/arafatm/Book-Programming-Phoenix/commit/7a8b74f)
+
+[AuthTest call with no session sets current user assign to nil](https://github.com/arafatm/Book-Programming-Phoenix/commit/124c4f7)
+
+[AuthTest login](https://github.com/arafatm/Book-Programming-Phoenix/commit/f073edc)
+
+[Speed up tests by reducing number of hashing rounds](https://github.com/arafatm/Book-Programming-Phoenix/commit/97cda90)
+
 ### Testing Views and Templates
+
+[VideoViewTest rendering index and new](https://github.com/arafatm/Book-Programming-Phoenix/commit/0697cae)
+
 ### Splitting Side Effects in Model Tests
+
+[UserTest valid and invalid attributes](https://github.com/arafatm/Book-Programming-Phoenix/commit/df689c9)
+
+[UserTest password registration and validation](https://github.com/arafatm/Book-Programming-Phoenix/commit/dd7a70b)
+
+Test Repository due to **side effects**
+
+[UserRepoTest unique username](https://github.com/arafatm/Book-Programming-Phoenix/commit/e5b1aed)
+
+[CategoryRepoTest we can sort categories alphabetically](https://github.com/arafatm/Book-Programming-Phoenix/commit/8f6ba8d)
+
 ### Wrapping Up
 
 **TODO: Fix deprecation warnings**
