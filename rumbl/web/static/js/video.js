@@ -1,5 +1,6 @@
 import Player from "./player"
 
+
 let Video = {
 
   init(socket, element){
@@ -19,13 +20,45 @@ let Video = {
     let msgContainer = document.getElementById("msg-container")
     let msgInput     = document.getElementById("msg-input")
     let postButton   = document.getElementById("msg-submit")
+
     let vidChannel   = socket.channel("videos:" + videoId)
 
-    vidChannel.join()
-    .receive("ok", resp => console.log("joined the video channel", resp))
-    .receive("error", reason => console.log("join failed", reason))
+    postButton.addEventListener("click", e => {
+      let payload = {body: msgInput.value, at: Player.getCurrentTime()}
 
-    vidChannel.on("ping", ({count}) => console.log("PING", count))
-  }
+      vidChannel.push("new_annotation", payload)
+        .receive("error", e => console.log(e) )
+      msgInput.value = ""
+    })
+
+    vidChannel.on("new_annotation", (resp) => {
+      this.renderAnnotation(msgContainer, resp)
+    })
+
+    vidChannel.join()
+      .receive("ok", resp => console.log("joined the video channel", resp))
+      .receive("error", reason => console.log("join failed", reason))
+  },
+
+  esc(str){
+    let div = document.createElement("div")
+    div.appendChild(document.createTextNode(str))
+    console.log("esc")
+    return div.innerHTML
+  },
+
+  renderAnnotation(msgContainer, {user, body, at}){ 
+    let template = document.createElement("div")
+
+    template.innerHTML = `
+    <a href="#" data-seek="${this.esc(at)}">
+      <b>${this.esc(user.username)}</b>: ${this.esc(body)}
+    </a>
+    `
+
+    msgContainer.appendChild(template)
+    msgContainer.scrollTop = msgContainer.scrollHeight
+  },
 }
+
 export default Video
