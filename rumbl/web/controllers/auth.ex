@@ -1,6 +1,9 @@
 defmodule Rumbl.Auth do
   import Plug.Conn
   import Comeonin.Bcrypt, only: [checkpw: 2, dummy_checkpw: 0]
+  import Phoenix.Controller
+  alias Rumbl.Router.Helpers
+
 
   def init(opts) do
     Keyword.fetch!(opts, :repo) # raise exception if key :repo doesn"t exist
@@ -11,9 +14,9 @@ defmodule Rumbl.Auth do
 
     cond do
       user = conn.assigns[:current_user] -> # User already assigned. Used for easier testing
-        conn
+        put_current_user(conn, user)
       user = user_id && repo.get(Rumbl.User, user_id) -> # lookup user if user_id exists
-        assign(conn, :current_user, user)
+        put_current_user(conn, user)
       true ->
         assign(conn, :current_user, nil)
     end
@@ -21,7 +24,7 @@ defmodule Rumbl.Auth do
 
   def login(conn, user) do
     conn
-    |> assign(:current_user, user)
+    |> put_current_user(user)
     |> put_session(:user_id, user.id)
     |> configure_session(renew: true) # resets session to protect from session fixation attack
   end
@@ -45,9 +48,6 @@ defmodule Rumbl.Auth do
     configure_session(conn, drop: true)
   end
 
-  import Phoenix.Controller
-  alias Rumbl.Router.Helpers
-
   def authenticate_user(conn, _opts) do
     if conn.assigns.current_user do
       conn
@@ -57,5 +57,12 @@ defmodule Rumbl.Auth do
       |> redirect(to: Helpers.page_path(conn, :index))
       |> halt()
     end
+  end
+
+  defp put_current_user(conn, user) do
+    token = Phoenix.Token.sign(conn, "user socket", user.id)
+    conn
+    |> assign(:current_user, user)
+    |> assign(:user_token, token)
   end
 end
