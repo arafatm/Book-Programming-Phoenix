@@ -700,19 +700,87 @@ error because `VideoController.show` expects an integer id
 
 :shipit: [Video extract id from slug](https://github.com/arafatm/Book-Programming-Phoenix/commit/9ecde5d)
 
-### Wrapping Up
-
 ## Chapter 10: Using Channels
+
 ### The Channel
+
+**channel**
+- send/receive messages (**events**)
+- keep state **(socket)**
+
+Conversation := **topic**
+- can have multiple topics which are *isolated, dedicated* processes
+
 ### Phoenix Clients with ES6
+
+:shipit: [JS Video.js establish socket connection](https://github.com/arafatm/Book-Programming-Phoenix/commit/ee3cf0d)
+
+- Import `Player` to play video and extract time for frame to place annotatins
+- `init` to set up player and get video ID
+- start `socket.connect()`
+- `vidChannel` will be used to connect to Phoenix `VideoChannel`
+
+:shipit: [JS initialize Video object](https://github.com/arafatm/Book-Programming-Phoenix/commit/04d162e)
+
+In the JS console you'll see `Unable to join > {reason: 'unmatched topic'}` 
+b'se we haven't created video channel yet
+
 ### Preparing Our Server for the Channel
+
+`socket` is declared in `lib/rumbl/endpoint.ex` and implemented in 
+`web/channels/user_socket.ex`
+
+:shipit: [JS define socket](https://github.com/arafatm/Book-Programming-Phoenix/commit/a8d22f4)
+
+When we reload the page we see in the JS Console `transport: connected to 
+ws://localhost:4000/socket/websocket?token=undefined&vsn=1.0.0`
+
 ### Creating the Channel
+
+A **channel** is a conversation on a **topic**
+
+Topics are strings that serve as identifiers in form `topic:subtopic`
+- topic is a resource name
+- subtopic is an id
+
+For Video topic, identifiers is `videos:video_id`
+
+:shipit: [VideoChannel: create and join](https://github.com/arafatm/Book-Programming-Phoenix/commit/423a8a4)
+- `VideoChannel.join` callback returns `{:ok, socket}` to authorize `join`
+- socket state remains for *duration of connection*
+
+Now in JS Console we see
+```
+push: phoenix heartbeat (4) Object {  }
+receive: ok phoenix phx_reply (4) Object { status: "ok", response: Object }
+```
+
 ### Sending and Receiving Events
+
+Each channel module has three ways to receive events.
+- `handle_in` receives direct channel events
+- `handle_out` intercepts broadcast events
+- `handle_info` receives OTP messages.
+
+:shipit: [Channel ping test](https://github.com/arafatm/Book-Programming-Phoenix/commit/a5c47e9)
+
+To handle video annotations...
+
+:shipit: [Video annotations](https://github.com/arafatm/Book-Programming-Phoenix/commit/2de30ae)
+
 ### Socket Authentication
+
+Session authentication is fine for req/resp apps. For channels, **token auth** 
+is better since it's a long-duration connection
+
+`Phoenix.Token` generates and verifies tokens. Messages are signed to prevent 
+tampering
+
+:shipit: [UserSocket token authentication](https://github.com/arafatm/Book-Programming-Phoenix/commit/aeab705)
+
 ### Persisting Annotations
 ### Handling Disconnects
 ### Wrapping Up
-
 ## Chapter 11: OTP
 ### Managing State with Processes
 ### Building GenServers for OTP
@@ -720,12 +788,10 @@ error because `VideoController.show` expects an integer id
 ### Designing an Information System with OTP
 ### Building the Wolfram Info System
 ### Wrapping Up
-
 ## Chapter 12: Observer and Umbrellas
 ### Introspecting with Observer
 ### Using Umbrellas
 ### Wrapping Up
-
 ## Chapter 13: Testing Channels and OTP
 ### Testing the Information System
 ### Isolating Wolfram
@@ -733,12 +799,9 @@ error because `VideoController.show` expects an integer id
 ### Authenticating a Test Socket
 ### Communicating with a Test Channel
 ### Wrapping Up
-
 ## Chapter 14: Whats Next?
 ### Other Interesting Features
 ### Whats Coming Next
 ### Good Luck
-
 ## You May Be Interested In
-
 https://subvisual.co/blog/posts/137-tutorial-deploying-elixir-applications-with-docker-and-digital-ocean/
