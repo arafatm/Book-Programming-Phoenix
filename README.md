@@ -778,8 +778,30 @@ tampering
 
 :shipit: [UserSocket token authentication](https://github.com/arafatm/Book-Programming-Phoenix/commit/aeab705)
 
+:shipit: [VideoChannel token authentication](https://github.com/arafatm/Book-Programming-Phoenix/commit/509fab2)
+
 ### Persisting Annotations
+
+:shipit: [$ mix phoenix.gen.model Annotation annotations body:text at:integer user_id:references:users video_id:references:videos](https://github.com/arafatm/Book-Programming-Phoenix/commit/99df010)
+
+:boom: `$ mix ecto.migrate`
+
+:shipit: [User and Video has_many Annotations](https://github.com/arafatm/Book-Programming-Phoenix/commit/003fb6b)
+
+:shipit: [VideoChannel persist annotations](https://github.com/arafatm/Book-Programming-Phoenix/commit/dfe97b9)
+
+:shipit: [VideoChannel render annotations on load](https://github.com/arafatm/Book-Programming-Phoenix/commit/ec7ff52)
+
+:shipit: [sync annotations with time on video](https://github.com/arafatm/Book-Programming-Phoenix/commit/7f4a70b)
+
 ### Handling Disconnects
+
+If the client gets disconnected (e.g. the server crashed), and then reconnects, 
+annotations are duplicated since `join` sends all annotations. We should 
+instead only send "new" annotations
+
+:shipit: [On client disconnect only update new annotations](https://github.com/arafatm/Book-Programming-Phoenix/commit/f280c3b)
+
 ### Wrapping Up
 ## Chapter 11: OTP
 ### Managing State with Processes
