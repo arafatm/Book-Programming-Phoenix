@@ -1,4 +1,3 @@
-
 defmodule Rumbl.Counter do
   use GenServer
 
