@@ -802,10 +802,71 @@ instead only send "new" annotations
 
 :shipit: [On client disconnect only update new annotations](https://github.com/arafatm/Book-Programming-Phoenix/commit/f280c3b)
 
-### Wrapping Up
 ## Chapter 11: OTP
+
+:shipit: [First OTP app](https://github.com/arafatm/Book-Programming-Phoenix/commit/a71f80d)
+- `listen` uses **tail recursion** to keep server alive 
+
+To test
+```
+iex> alias Rumbl.Counter
+nil
+
+iex> {:ok, counter} = Counter.start_link(0)
+{:ok, #PID<0.253.0>}
+
+iex> Counter.inc(counter)
+:inc
+
+iex> Counter.inc(counter)
+:inc
+
+iex> Counter.val(counter)
+2
+
+iex> Counter.dec(counter)
+:dec
+
+iex> Counter.val(counter)
+1
+```
+
 ### Managing State with Processes
+
+:shipit: [Rewrite Counter using OTP GenServer](https://github.com/arafatm/Book-Programming-Phoenix/commit/ede3da3)
+- Using GenServer we don't need to set up references for synch messages
+- `GenServer.call` for **synch** messages
+- `GenServer.cast` for **async** messages
+
+To test
+```
+iex> alias Rumbl.Counter
+nil
+
+iex> {:ok, counter} = Counter.start_link(10)
+{:ok, #PID<0.96.0>}
+
+iex> Counter.dec(counter)
+:ok
+
+iex> Counter.dec(counter)
+:ok
+
+ iex> Counter.val(counter)
+ 8
+```
+
+:shipit: [Failover: Add worker to Phoenix Supervisor](https://github.com/arafatm/Book-Programming-Phoenix/commit/8be6161)
+
+:shipit: [Testing server crash](https://github.com/arafatm/Book-Programming-Phoenix/commit/24fd19b)
+- test it with `iex -S mix`
+
 ### Building GenServers for OTP
+
+:shipit: [Testing :one_for_one strategy](https://github.com/arafatm/Book-Programming-Phoenix/commit/8cae8b7)
+- test it with `iex -S mix phoenix.server`
+- Now when the worker crashes, both the worker and **Cowboy is restarted**
+
 ### Supervision Strategies
 ### Designing an Information System with OTP
 ### Building the Wolfram Info System
