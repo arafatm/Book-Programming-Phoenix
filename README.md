@@ -867,6 +867,51 @@ iex> Counter.dec(counter)
 - test it with `iex -S mix phoenix.server`
 - Now when the worker crashes, both the worker and **Cowboy is restarted**
 
+#### Agents
+
+**Agent** is a simpler abstraction of GenServers with 5 functions
+- `start_link` initializes agent
+- `stop` stops the agent
+- `update` changes the stage of the agent
+- `get` retrieves the agent's current value
+- `get_and_update` Does a `get` and `update` simultaneously
+
+Example Counter using Agent
+```
+iex> import Agent
+nil
+
+iex> {:ok, agent} = start_link fn -> 5 end
+{:ok, #PID<0.57.0>}
+
+iex> update agent, &(&1 + 1)
+:ok
+
+iex> get agent, &(&1)
+6
+
+iex> stop agent
+:ok
+```
+
+Agent can also have a `:name`
+```
+iex> import Agent
+nil
+
+iex> {:ok, agent} = start_link fn -> 5 end, name: MyAgent
+{:ok, #PID<0.57.0>}
+
+iex> update MyAgent, &(&1 + 1)
+:ok
+
+iex> get MyAgent, &(&1)
+6
+
+iex> stop MyAgent
+:ok
+```
+
 ### Supervision Strategies
 ### Designing an Information System with OTP
 ### Building the Wolfram Info System
