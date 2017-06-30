@@ -1,5 +1,7 @@
 #  Programming Phoenix
 
+:boom:
+
 :shipit: [epub](https://github.com/arafatm/Books/blob/master/langs/elixir/programming%20phoenix%20(for%20arafat%20mohamed)_chris%20mcc.epub)
 
 # Part 1: Building with Functional MVC
@@ -17,6 +19,7 @@ In short, youll learn to build traditional applications that are faster, more
 reliable, and easier to understand.
 
 ## Chapter 2: The Lay of the Land
+
 ### Installing Your Development Environment
 
 - elixir 1.1.0
@@ -143,6 +146,8 @@ iex> Repo.get_by User, name: "Bruce"
 ```
 
 ### Building a Controller
+
+
 
 Standard actions: `:show`, `:index`, `:new`, `:create`, `:edit`, `:update`, `:delete`
 
@@ -804,11 +809,13 @@ instead only send "new" annotations
 
 ## Chapter 11: OTP
 
+### Managing State with Processes
+
 :shipit: [First OTP app](https://github.com/arafatm/Book-Programming-Phoenix/commit/a71f80d)
 - `listen` uses **tail recursion** to keep server alive 
 
 To test
-```
+```elixir
 iex> alias Rumbl.Counter
 nil
 
@@ -831,7 +838,7 @@ iex> Counter.val(counter)
 1
 ```
 
-### Managing State with Processes
+### Building GenServers for OTP
 
 :shipit: [Rewrite Counter using OTP GenServer](https://github.com/arafatm/Book-Programming-Phoenix/commit/ede3da3)
 - Using GenServer we don't need to set up references for synch messages
@@ -852,8 +859,8 @@ iex> Counter.dec(counter)
 iex> Counter.dec(counter)
 :ok
 
- iex> Counter.val(counter)
- 8
+iex> Counter.val(counter)
+8
 ```
 
 :shipit: [Failover: Add worker to Phoenix Supervisor](https://github.com/arafatm/Book-Programming-Phoenix/commit/8be6161)
@@ -861,11 +868,26 @@ iex> Counter.dec(counter)
 :shipit: [Testing server crash](https://github.com/arafatm/Book-Programming-Phoenix/commit/24fd19b)
 - test it with `iex -S mix`
 
-### Building GenServers for OTP
+Restart Strategies
+- `:permanent` is *default* strategy. Child is always restarted.
+- `:temporary` child is never restarted
+- `:transient` child restarted only if terminated abnormally with exit code NOT `:normal :shutdown or {:shutdown, term}`
+
+### Supervision Strategies
+
+- `:one_for_one` supervisor restarts only that process
+- `:one_for_all` supervisor terminates all children and then restarts all children.
+- `:rest_for_one` supervisor terminates and restarts all child processes
+- `:simple_one_for_one` Similar to :one_for_one but used when a supervisor
+  needs to dynamically supervise processes. For example, a web server would use
+  it to supervise web requests, which may be 10, 1,000, or 100,000 concurrently
+  running processes.
 
 :shipit: [Testing :one_for_one strategy](https://github.com/arafatm/Book-Programming-Phoenix/commit/8cae8b7)
 - test it with `iex -S mix phoenix.server`
 - Now when the worker crashes, both the worker and **Cowboy is restarted**
+
+[Undo :one_for_one](https://github.com/arafatm/Book-Programming-Phoenix/commit/67186cdd4f99646544b3edd6917aa6cf13606fef)
 
 #### Agents
 
@@ -912,9 +934,68 @@ iex> stop MyAgent
 :ok
 ```
 
-### Supervision Strategies
 ### Designing an Information System with OTP
+
+The goal for our application is to have multiple information systems. We might
+pull from an API like WolframAlpha while at the same time referencing a local
+database. WolframAlpha is a service that allows users to ask natural-language
+questions and get rich responses. We’d like our design to start multiple
+information system queries in parallel and accumulate the results. Then, we can
+take the best matching responses.
+
+Using `:temporary` restart strategy.
+
+:shipit: [Set up InfoSys.Supervisor with simple_on_for_one strategy](https://github.com/arafatm/Book-Programming-Phoenix/commit/28e68a9)
+
+Supervisor can start multiple backends using **proxying**.
+
+:shipit: [start_link Proxy for backends](https://github.com/arafatm/Book-Programming-Phoenix/commit/e847994)
+
 ### Building the Wolfram Info System
+
+Need XML parser to handle WorlframAlpha's XML responses
+
+:shipit: [Add :sweet_xml to mix deps](https://github.com/arafatm/Book-Programming-Phoenix/commit/68a0fad)
+
+API keys can be stored in `config/dev.exs` but it's not secure.
+
+
+:boom: `config/prod.secret.exs` is ignored in version control and used to store
+sensitive creds
+
+:shipit: [add WolframAlpha key from WolframAlpha Developer Portal](https://github.com/arafatm/Book-Programming-Phoenix/commit/c8836f2)
+
+GenServer vs Agent vs Task
+- **GenServer** manages state and executes functions
+- **Agent** manages state 
+- **Task** simply executes a function
+
+:shipit: [InfoSys.Wolfram backend](https://github.com/arafatm/Book-Programming-Phoenix/commit/2480d10)
+
+Testing WolframAlpha 
+```
+iex> Rumbl.InfoSys.compute('what is elixir?')
+
+  # Wait a few seconds for a result
+
+iex> flush()   # to display results
+[{:results, #Reference<0.0.1.9227>,
+[%Rumbl.InfoSys.Result{backend: 'wolfram', score: 95,
+text: '1 | noun | a sweet flavored liquid (usually containing ...',
+url: nil}]}]
+```
+
+Use `Process.Monitor` to detect backend crashes
+
+:shipit: [InfoSys add process monitor](https://github.com/arafatm/Book-Programming-Phoenix/commit/759de04)
+
+Test with Process Monitor
+```
+iex> Rumbl.InfoSys.compute('what is the meaning of life?')
+[%Rumbl.InfoSys.Result{backend: %Rumbl.User{...}, score: 95,
+text: '42\n(according to the book The Hitchhiker', url: nil}]
+```
+
 ### Wrapping Up
 ## Chapter 12: Observer and Umbrellas
 ### Introspecting with Observer
