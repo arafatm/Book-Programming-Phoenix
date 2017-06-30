@@ -1,10 +1,7 @@
 #  Programming Phoenix
 
-:boom:
 
-:shipit: [epub](https://github.com/arafatm/Books/blob/master/langs/elixir/programming%20phoenix%20(for%20arafat%20mohamed)_chris%20mcc.epub)
-
-# Part 1: Building with Functional MVC
+## Part 1: Building with Functional MVC
 
 In Part I, well talk about traditional request/response web applications
 - basic layers of Phoenix
@@ -621,7 +618,7 @@ Test Repository due to **side effects**
 
 :shipit: [CategoryRepoTest we can sort categories alphabetically](https://github.com/arafatm/Book-Programming-Phoenix/commit/8f6ba8d)
 
-# Part 2: Writing Interactive and Maintainable Applications
+## Part 2: Writing Interactive and Maintainable Applications
 
 ## Chapter 9: Watching Videos
 
@@ -973,7 +970,8 @@ GenServer vs Agent vs Task
 :shipit: [InfoSys.Wolfram backend](https://github.com/arafatm/Book-Programming-Phoenix/commit/2480d10)
 
 Testing WolframAlpha 
-```
+
+```elixir
 iex> Rumbl.InfoSys.compute('what is elixir?')
 
   # Wait a few seconds for a result
@@ -990,10 +988,9 @@ Use `Process.Monitor` to detect backend crashes
 :shipit: [InfoSys add process monitor](https://github.com/arafatm/Book-Programming-Phoenix/commit/759de04)
 
 Test with Process Monitor
-```
-iex> Rumbl.InfoSys.compute('what is the meaning of life?')
-[%Rumbl.InfoSys.Result{backend: %Rumbl.User{...}, score: 95,
-text: '42\n(according to the book The Hitchhiker', url: nil}]
+```elixir
+  iex> Rumbl.InfoSys.compute('what is the meaning of life?')
+  [%Rumbl.InfoSys.Result{backend: %Rumbl.User{...}, score: 95, text: '42\n(according to the book The Hitchhiker', url: nil}]
 ```
 
 ### Wrapping Up
