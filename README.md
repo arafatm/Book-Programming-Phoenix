@@ -1,6 +1,5 @@
 #  Programming Phoenix
 
-
 ## Part 1: Building with Functional MVC
 
 In Part I, well talk about traditional request/response web applications
@@ -97,7 +96,8 @@ which points to
 :shipit: [lib/hello.endpoints.ex](https://github.com/arafatm/Book-Programming-Phoenix/blob/090ae4ee0fc1dd40aed91a66d95ac627c47fd8af/hello/lib/hello/endpoint.ex)
 
 Typical Phoenix app looks like
-```
+
+```elixir
 connection
 |> endpoint     # includes functions for every request
 |> router
@@ -123,6 +123,7 @@ Create new Rumbl app
 :shipit: [Disable Ecto for now](https://github.com/arafatm/Book-Programming-Phoenix/commit/571e9d7)
 
 To Test out
+
 ```elixir
 iex> alias Rumbl.User
 iex> alias Rumbl.Repo
@@ -956,7 +957,6 @@ Need XML parser to handle WorlframAlpha's XML responses
 
 API keys can be stored in `config/dev.exs` but it's not secure.
 
-
 :boom: `config/prod.secret.exs` is ignored in version control and used to store
 sensitive creds
 
@@ -969,7 +969,7 @@ GenServer vs Agent vs Task
 
 :shipit: [InfoSys.Wolfram backend](https://github.com/arafatm/Book-Programming-Phoenix/commit/2480d10)
 
-Testing WolframAlpha 
+__Testing WolframAlpha__
 
 ```elixir
 iex> Rumbl.InfoSys.compute('what is elixir?')
@@ -989,9 +989,11 @@ Use `Process.Monitor` to detect backend crashes
 
 Test with Process Monitor
 ```elixir
-  iex> Rumbl.InfoSys.compute('what is the meaning of life?')
-  [%Rumbl.InfoSys.Result{backend: %Rumbl.User{...}, score: 95, text: '42\n(according to the book The Hitchhiker', url: nil}]
+    iex> Rumbl.InfoSys.compute('what is the meaning of life?')
+    [%Rumbl.InfoSys.Result{backend: %Rumbl.User{...}, score: 95, text: '42\n(according to the book The Hitchhiker', url: nil}]
 ```
+
+
 
 ### Wrapping Up
 ## Chapter 12: Observer and Umbrellas
