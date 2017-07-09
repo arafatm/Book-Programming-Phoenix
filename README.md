@@ -1016,6 +1016,11 @@ Instead we use `Process.send_after` to send a `:timedout` message
 - `defp kill` shutds down the backend
 - `defp cleanup` cancels the time with `:erlang.cancel_time` and flushed `timedout` message from inbox if it was already sent
 
+**Integrating OTP Services with Channels**
+
+:shipit: [Integrate OTP services with Channels](https://github.com/arafatm/Book-Programming-Phoenix/commit/e655a09)
+- Don't forget to `mix run priv/repo/backend_seeds.exs` to add wolfram user
+- :shipit: [typo](https://github.com/arafatm/Book-Programming-Phoenix/commit/83a866b)
 
 ### Wrapping Up
 ## Chapter 12: Observer and Umbrellas
