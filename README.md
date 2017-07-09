@@ -969,7 +969,7 @@ GenServer vs Agent vs Task
 
 :shipit: [InfoSys.Wolfram backend](https://github.com/arafatm/Book-Programming-Phoenix/commit/2480d10)
 
-__Testing WolframAlpha__
+**Testing WolframAlpha**
 
 ```elixir
 iex> Rumbl.InfoSys.compute('what is elixir?')
@@ -993,6 +993,28 @@ Test with Process Monitor
     [%Rumbl.InfoSys.Result{backend: %Rumbl.User{...}, score: 95, text: '42\n(according to the book The Hitchhiker', url: nil}]
 ```
 
+**Timing Out**
+
+`after` used to specify timeout in milliseconds
+
+```elixir
+ 	iex> receive do
+ 	...>   :this_will_never_arrive -> :ok
+ 	...> after
+ 	...>   1_000 -> :timedout
+ 	...> end
+ 	:timedout
+```
+
+:boom: This approach is _cumulative_. With a 5s timeout on 3 backends, the total timeout is 15s.
+
+Instead we use `Process.send_after` to send a `:timedout` message
+
+:shipit: [Timing out](https://github.com/arafatm/Book-Programming-Phoenix/commit/16319a5)
+- `await_results` retrieves timeout option and uses `Process.send_after` to send a `:timedout` message
+- handle `:timedout` message in `await_result([head|tail], ..)` `receive do` on line 55
+- `defp kill` shutds down the backend
+- `defp cleanup` cancels the time with `:erlang.cancel_time` and flushed `timedout` message from inbox if it was already sent
 
 
 ### Wrapping Up
