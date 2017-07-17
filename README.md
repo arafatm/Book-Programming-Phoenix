@@ -367,13 +367,13 @@ them in primary struct. Then `Repo.all(q)` to get data in its own struct
 
 ### Adding Categories
 
-:shipit: [$ mix phoenix.gen.model Category categories name:string](https://github.com/arafatm/Book-Programming-Phoenix/commit/dc741bc)
+:shipit: [mix phoenix.gen.model Category categories name:string](https://github.com/arafatm/Book-Programming-Phoenix/commit/dc741bc)
 
 :shipit: [Migrations.CreateCategory :name is required and unique](https://github.com/arafatm/Book-Programming-Phoenix/commit/7a08b9d)
 
 :shipit: [Video belongs_to Category && set required/optional fields](https://github.com/arafatm/Book-Programming-Phoenix/commit/9404f06)
 
-:shipit: [`$ mix ecto.gen.migration add_category_id_to_video`](https://github.com/arafatm/Book-Programming-Phoenix/commit/f9bc4a9)
+:shipit: [mix ecto.gen.migration add_category_id_to_video](https://github.com/arafatm/Book-Programming-Phoenix/commit/f9bc4a9)
 
 :shipit: [migration to add category_id to videos](https://github.com/arafatm/Book-Programming-Phoenix/commit/f547287)
 
@@ -785,9 +785,9 @@ tampering
 
 ### Persisting Annotations
 
-:shipit: [$ mix phoenix.gen.model Annotation annotations body:text at:integer user_id:references:users video_id:references:videos](https://github.com/arafatm/Book-Programming-Phoenix/commit/99df010)
+:shipit: [mix phoenix.gen.model Annotation annotations body:text at:integer user_id:references:users video_id:references:videos](https://github.com/arafatm/Book-Programming-Phoenix/commit/99df010)
 
-:boom: `$ mix ecto.migrate`
+:boom: `mix ecto.migrate`
 
 :shipit: [User and Video has_many Annotations](https://github.com/arafatm/Book-Programming-Phoenix/commit/003fb6b)
 
