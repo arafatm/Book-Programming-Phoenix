@@ -527,7 +527,7 @@ changeset.errors
 
 **Set up continuous testing**
 - [Continuous testing with mix test watch](https://github.com/arafatm/Book-Programming-Phoenix/commit/d2f1d63)
--[Clear terminal on each test run](https://github.com/arafatm/Book-Programming-Phoenix/commit/ac8644c)
+- [Clear terminal on each test run](https://github.com/arafatm/Book-Programming-Phoenix/commit/ac8644c)
 - `mix deps.update`
 - `mix test.watch`
 
